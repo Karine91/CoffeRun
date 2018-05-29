@@ -1,0 +1,9 @@
+.strength-info > span{
+  font-weight: bold;
+}
+.achievement{
+  display: none;
+}
+.achievement.open{
+  display: block;
+}

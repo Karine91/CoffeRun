@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>cofferun</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body class="container">
   <header>
@@ -42,6 +43,12 @@
               Grande
             </label>
           </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="size" value="coffezilla">
+              Coffee-Zilla
+            </label>
+          </div>
           <div class="form-group">
             <label for="flavorShot">Flavor Shot</label>
             <select id="flavorShot" class="form-control" name="flavor">
@@ -53,14 +60,61 @@
           </div>
           <div class="form-group">
             <label for="strengthLevel">Caffeine Rating</label>
-            <input name="strength" id="strengthLevel" type="range" value="30">
+            <span class="strength-info">
+              (
+              <span data-coffee-strength="value"></span>
+              )
+            </span>
+            <input name="strength" id="strengthLevel" type="range" value="30" data-coffee-strength="input">
           </div>
+
+          <div class="form-group achievement">
+            <label>Достижение</label>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="traveltime"> Путешествие во времени
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="readmind"> Чтение мыслей
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="cleancode"> Код без ошибок
+              </label>
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-default">Submit</button>
           <button type="reset" class="btn btn-default">Reset</button>
         </form>
       </div>
     </div>
   </section>
+  <!-- Modal -->
+  <div class="modal fade" id="modalAchievement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Новое достижение!</h4>
+        </div>
+        <div class="modal-body">
+          Поздравляем, Вы выбрали невероятно крепкий напиток! У Вас отличный вкус:)
+          Желаете ли вы воспользоваться этим достижением?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="achievementNo" data-dismiss="modal">Нет</button>
+          <button type="button" class="btn btn-primary" id="achievementYes">Да</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
+<script src="scripts/formhandler.js" charset="utf-8"></script>
 <script src="scripts/datastore.js" charset="utf-8"></script>
 <script src="scripts/truck.js" charset="utf-8"></script>
 <script src="scripts/main.js" charset="utf-8"></script>
