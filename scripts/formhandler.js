@@ -52,14 +52,12 @@
         data[item.name] = item.value;
         console.log(item.name + ' is ' + item.value);
       });
-      fn(data);
+
       var check = self.checkAchievement(data);
       if(!check) {
-        this.reset();
-        self.openAchievement = false;
-      };
-      self.showStrengthValue();
-      this.elements[0].focus();
+        fn(data);
+        self.resetForm();
+      }
     });
   };
 
@@ -91,13 +89,14 @@
       this.hideModalAchievement();
     }.bind(this));
     $(NO_ACHIEVEMENT_SELECTOR).on('click', function (event) {
-      $(ACHIEVEMENT_FIELD_SELECTOR).removeClass('open');
       this.resetForm();
     }.bind(this));
   }
 
   FormHandler.prototype.resetForm = function(){
+    $(ACHIEVEMENT_FIELD_SELECTOR).removeClass('open');
     this.$formElement[0].reset();
+    this.openAchievement = false;
     this.showStrengthValue();
     this.$formElement[0].elements[0].focus();
   }
