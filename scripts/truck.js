@@ -27,6 +27,10 @@
     }.bind(this));
   };
 
+  Truck.prototype.getOrder = function (id) {
+    return this.db.get(id);
+  }
+
   App.Truck = Truck;
   window.App = App;
 })(window);

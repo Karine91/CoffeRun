@@ -16,3 +16,13 @@
 .mocha{
   color: #F5CD92;
 }
+.delivered{
+  background-color: #cccccc;
+  opacity: 0.5;
+}
+.delivered label{
+  text-decoration: line-through;
+}
+.order-list{
+  user-select: none;
+}

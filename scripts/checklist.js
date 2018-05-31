@@ -65,6 +65,12 @@
     this.$element.append(rowElement.$element);
   };
 
+  CheckList.prototype.editRow = function (coffeeOrder) {
+    var $rowContainer = this.getRow(coffeeOrder.emailAddress);
+    var rowElement = new Row(coffeeOrder);
+    $rowContainer.html(rowElement.$element);
+  };
+
   CheckList.prototype.removeRow = function (email) {
     this.$element
     .find('[value="' + email + '"]')
@@ -72,13 +78,38 @@
     .remove();
   };
 
-  CheckList.prototype.addClickHandler = function (fn) {
-    this.$element.on('click', 'input', function (event) {
-      var email = event.target.value;
-      this.removeRow(email);
-      fn(email);
-    }.bind(this));
+  CheckList.prototype.getRow = function (email) {
+    return this.$element
+    .find('[value="' + email + '"]')
+    .closest('[data-coffee-order="checkbox"]');
   };
+
+  CheckList.prototype.addClickHandler = function (cbClick, cbDblClick, setFormData) {
+    var self = this;
+    self.clicks = 0;
+    this.$element.on('click', 'input', function (event) {
+      self.clicks++;
+      if (self.clicks === 1){
+        self.timeoutId = setTimeout(function () {
+          console.log('click');
+          var email = event.target.value;
+          self.clicks = 0;
+          $(event.target).closest('label').addClass('delivered');
+          setTimeout(function () {
+            self.removeRow(email)
+          }, 600);
+          cbClick(email);
+        }, 500);
+      }else{
+        console.log('doubleclick');
+        var dataOrder = cbDblClick(event.target.value);
+        clearTimeout(self.timeoutId);
+        self.clicks = 0;
+        setFormData(dataOrder);
+      }
+    });
+  };
+
 
   App.CheckList = CheckList;
   window.App = App;

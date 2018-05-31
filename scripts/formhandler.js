@@ -73,10 +73,12 @@
       this.$rangeLabel.addClass('text-danger');
     }
   }
+
   FormHandler.prototype.showStrengthValue = function(){
     this.$rangeLabel.text(this.$rangeStrength[0].value);
     this.highlightStrengthValue(this.$rangeStrength[0].value);
   }
+
   FormHandler.prototype.addRangeInputChangeHandler = function(){
     this.$rangeStrength.on('change', function (event) {
       this.showStrengthValue();
@@ -93,13 +95,43 @@
     }.bind(this));
   }
 
-  FormHandler.prototype.resetForm = function(){
+  FormHandler.prototype.resetForm = function () {
     $(ACHIEVEMENT_FIELD_SELECTOR).removeClass('open');
     this.$formElement[0].reset();
     this.openAchievement = false;
     this.showStrengthValue();
     this.$formElement[0].elements[0].focus();
   }
+
+  FormHandler.prototype.setFormData = function (data) {
+    var $coffeInput = this.$formElement.find('[name ="coffee"]');
+    var $emailInput = this.$formElement.find('[name="emailAddress"]');
+    var $selectFlavor = this.$formElement.find('[name="flavor"]');
+    var $strengthLevel = this.$formElement.find('[name="strength"]');
+
+    console.log(data);
+    $coffeInput.val(data.coffee);
+    $emailInput.val(data.emailAddress);
+    this.$formElement.find('[value="' + data.size +'"]').prop( "checked", true);
+    $selectFlavor.val(data.flavor);
+    $strengthLevel.val(data.strength);
+    this.showStrengthValue();
+
+    if(data.cleancode || data.readmind || data.traveltime){
+      $(ACHIEVEMENT_FIELD_SELECTOR).addClass('open');
+      this.openAchievement = true;
+      if(data.cleancode){
+        this.$formElement.find('[name="cleancode"]').prop( "checked" , true);
+      }
+      if(data.readmind){
+        this.$formElement.find('[name="readmind"]').prop( "checked" , true);
+      }
+      if(data.traveltime){
+        this.$formElement.find('[name="traveltime"]').prop( "checked" , true);
+      }
+    }
+  }
+
   App.FormHandler = FormHandler;
   window.App = App;
 
