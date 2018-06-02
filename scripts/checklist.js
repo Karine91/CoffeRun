@@ -91,21 +91,22 @@
       self.clicks++;
       if (self.clicks === 1){
         self.timeoutId = setTimeout(function () {
-          console.log('click');
-          var email = event.target.value;
-          self.clicks = 0;
-          $(event.target).closest('label').addClass('delivered');
-          setTimeout(function () {
-            self.removeRow(email)
-          }, 600);
-          cbClick(email);
+          cbClick(email).then(function () {
+            var email = event.target.value;
+            self.clicks = 0;
+            $(event.target).closest('label').addClass('delivered');
+            setTimeout(function () {
+              self.removeRow(email)
+            }, 600);
+          });
         }, 500);
       }else{
-        console.log('doubleclick');
-        var dataOrder = cbDblClick(event.target.value);
         clearTimeout(self.timeoutId);
         self.clicks = 0;
-        setFormData(dataOrder);
+        cbDblClick(event.target.value).then(function (dataOrder) {
+          console.log(dataOrder);
+          setFormData(dataOrder);
+        });
       }
     });
   };

@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>cofferun</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap.min.css">
   <link rel="stylesheet" href="stylesheets/style.css">
+  <style>
+    form :focus:required:invalid {
+      border-color: #a94442;
+    }
+  </style>
 </head>
 <body class="container">
   <header>
@@ -18,11 +23,11 @@
         <form data-coffee-order="form">
           <div class="form-group">
             <label for="coffeeOrder">Coffee Order</label>
-            <input type="text" class="form-control" name="coffee" id="coffeeOrder" autofocus>
+            <input type="text" class="form-control" name="coffee" id="coffeeOrder" required autofocus pattern="[a-zA-Z\s]+">
           </div>
           <div class="form-group">
             <label for="emailInput">Email</label>
-            <input class="form-control" type="email" name="emailAddress"
+            <input class="form-control" type="email" name="emailAddress" required
             id="emailInput" value="" placeholder="dr@who.com">
           </div>
           <div class="radio">
@@ -120,10 +125,13 @@
       </div>
     </div>
   </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
+<script src="vendor/jquery.min.js" charset="utf-8"></script>
+<script src="vendor/bootstrap.min.js" charset="utf-8"></script>
+<script src="webshim/polyfiller.js" charset="utf-8"></script>
+<script src="scripts/validation.js" charset="utf-8"></script>
 <script src="scripts/checklist.js" charset="utf-8"></script>
 <script src="scripts/formhandler.js" charset="utf-8"></script>
+<script src="scripts/remotedatastore.js" charset="utf-8"></script>
 <script src="scripts/datastore.js" charset="utf-8"></script>
 <script src="scripts/truck.js" charset="utf-8"></script>
 <script src="scripts/main.js" charset="utf-8"></script>
